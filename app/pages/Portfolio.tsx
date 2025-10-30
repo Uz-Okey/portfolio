@@ -30,7 +30,7 @@ export default function Portfolio() {
   return (
     <div id="Portfolio" className="bg-[#b7b6b381] mt-10 pb-[100px]">
       <AnimateText
-        text="03 Portfolio"
+        text="04 Portfolio"
         type="cascade"
         className="text-2xl text-gray-700 text-shadow-2xs pt-8 mt-5 mb-5 font-bold text-center"
       />

@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
+import { Cursor } from "@/components/ui/custom-cursor";
+import { Providers } from "./providers"
+import NavbarPage from "./pages/NavbarPage";
+import HeartIcon from "./pages/HeartIcon";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,9 +28,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
       >
-        {children}
+
+        <Providers>
+          <Cursor name="" cursorColor="green"  customSVG={<HeartIcon />}>
+            <NavbarPage />
+            {children}
+          </Cursor>
+        </Providers>
       </body>
     </html>
   );

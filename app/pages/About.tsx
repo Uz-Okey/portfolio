@@ -12,6 +12,7 @@ export default function About() {
                 className="text-2xl font-bold text-center text-white text-shadow-2xs"
                 duration={0.10}
                 delay={0}
+             
 
             />
 

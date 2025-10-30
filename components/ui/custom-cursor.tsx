@@ -1,10 +1,9 @@
 'use client'
 
 import React, { useState, useCallback } from 'react'
-import { motion, AnimatePresence, useMotionValue } from 'motion/react'
+import { motion, AnimatePresence, useMotionValue, MotionValue } from 'motion/react'
 import { cn } from '@/lib/utils'
 
-// Default pointer SVG component
 const DefaultPointerSVG = ({ className }: { className?: string }) => (
   <svg
     stroke="currentColor"
@@ -19,6 +18,15 @@ const DefaultPointerSVG = ({ className }: { className?: string }) => (
   </svg>
 )
 
+interface CursorProps {
+  children: React.ReactNode
+  className?: string
+  name: string
+  customSVG?: React.ReactNode
+  svgClassName?: string
+  cursorColor?: 'sky' | 'red' | 'green' | 'blue' | 'purple' | 'pink' | 'yellow' | 'indigo' | string
+}
+
 export const Cursor = ({
   children,
   className,
@@ -26,19 +34,12 @@ export const Cursor = ({
   customSVG,
   svgClassName,
   cursorColor = 'sky'
-}: {
-  children: React.ReactNode
-  className?: string
-  name: string
-  customSVG?: React.ReactNode
-  svgClassName?: string
-  cursorColor?: 'sky' | 'red' | 'green' | 'blue' | 'purple' | 'pink' | 'yellow' | 'indigo' | string
-}) => {
+}: CursorProps) => {
   const posX = useMotionValue(0)
   const posY = useMotionValue(0)
   const containerRef = React.useRef<HTMLDivElement>(null)
-  const [mouseInside, setMouseInside] = useState<boolean>(false)
-  
+  const [mouseInside, setMouseInside] = useState(false)
+
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect()
@@ -51,32 +52,25 @@ export const Cursor = ({
     }
   }, [posX, posY])
 
-  const handleMouseEnter = useCallback(() => {
-    setMouseInside(true)
-  }, [])
-
-  const handleMouseLeave = useCallback(() => {
-    setMouseInside(false)
-  }, [])
+  const handleMouseEnter = useCallback(() => setMouseInside(true), [])
+  const handleMouseLeave = useCallback(() => setMouseInside(false), [])
 
   return (
     <div
-      onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      style={{
-        cursor: 'none'
-      }}
       ref={containerRef}
-      className={cn('relative', className)}>
-      
+      className={cn('relative', className)}
+      style={{ cursor: 'none' }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {children}
       <AnimatePresence>
         {mouseInside && (
-          <FollowCursor 
-            x={posX} 
-            y={posY} 
-            name={name} 
+          <FollowCursor
+            x={posX}
+            y={posY}
+            name={name}
             customSVG={customSVG}
             svgClassName={svgClassName}
             cursorColor={cursorColor}
@@ -87,23 +81,26 @@ export const Cursor = ({
   )
 }
 
-export const FollowCursor = ({ 
-  x, 
-  y, 
-  name, 
-  customSVG, 
-  svgClassName,
-  cursorColor = 'sky'
-}: { 
-  x: any
-  y: any
+interface FollowCursorProps {
+  x: MotionValue<number>
+  y: MotionValue<number>
   name: string
   customSVG?: React.ReactNode
   svgClassName?: string
   cursorColor?: string
-}) => {
+}
+
+export const FollowCursor = ({
+  x,
+  y,
+  name,
+  customSVG,
+  svgClassName,
+  cursorColor = 'sky'
+}: FollowCursorProps) => {
+
   const getColorClasses = (color: string) => {
-    const predefinedColors = {
+    const predefinedColors: Record<string, string> = {
       sky: 'stroke-sky-600 text-sky-500 bg-sky-500',
       red: 'stroke-red-600 text-red-500 bg-red-500',
       green: 'stroke-green-600 text-green-500 bg-green-500',
@@ -113,8 +110,7 @@ export const FollowCursor = ({
       yellow: 'stroke-yellow-600 text-yellow-500 bg-yellow-500',
       indigo: 'stroke-indigo-600 text-indigo-500 bg-indigo-500',
     }
-    
-    return predefinedColors[color as keyof typeof predefinedColors] || predefinedColors.sky
+    return predefinedColors[color] || predefinedColors.sky
   }
 
   const colorClasses = getColorClasses(cursorColor)
@@ -123,40 +119,24 @@ export const FollowCursor = ({
   return (
     <motion.div
       className="absolute z-50 h-4 w-4 rounded-full pointer-events-none"
-      style={{
-        left: x,
-        top: y,
-      }}
-      initial={{
-        scale: 0,
-        opacity: 0
-      }}
-      animate={{
-        scale: 1,
-        opacity: 1
-      }}
-      exit={{
-        scale: 0,
-        opacity: 0
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 300,
-        damping: 25
-      }}
+      style={{ left: x, top: y }}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 25 }}
     >
       {customSVG ? (
         <div className={cn(
-          "h-6 w-6 -translate-x-[12px] -translate-y-[10px] -rotate-[70deg] transform",
+          "h-6 w-6 -translate-x-3 -translate-y-2.5 -rotate-70 transform",
           textClass,
           svgClassName
         )}>
           {customSVG}
         </div>
       ) : (
-        <DefaultPointerSVG 
+        <DefaultPointerSVG
           className={cn(
-            "h-6 w-6 -translate-x-[12px] -translate-y-[10px] -rotate-[70deg] transform",
+            "h-6 w-6 -translate-x-3 -translate-y-2.5 -rotate-70 transform",
             strokeClass,
             textClass,
             svgClassName

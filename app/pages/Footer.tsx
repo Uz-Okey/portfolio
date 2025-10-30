@@ -19,7 +19,7 @@ export default function Footer() {
                 >
                     <span className="border-green-700 text-green-700 border-r-4  p-2 m-0 rounded-full">O</span>
                     <span className="text-gray-800 m-0 font-semibold tracking-tight">
-                        key.dev
+                        Okey.dev
                     </span>
                 </Link>
 

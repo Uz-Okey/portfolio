@@ -9,7 +9,7 @@ export default function About() {
             <AnimateText
                 text="03 About Me"
                 type="cascade"
-                className="text-2xl font-bold text-center text-white text-shadow-2xs"
+                className="text-2xl font-bold text-center text-gray-700 text-shadow-2xs shadow-2xl"
                 duration={0.10}
                 delay={0}
              

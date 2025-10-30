@@ -6,6 +6,7 @@ import { color } from "framer-motion"
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
+
   const navigation = [
     { title: "Home", path: "/", style: `${color}` },
     { title: "Portfolio", path: "#Portfolio" },
@@ -84,14 +85,14 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         <div
-          className={`menu-content md:hidden transition-all duration-300 ease-in-out overflow-hidden ${open ? "max-h-60 opacity-100" : "max-h-0 opacity-0"}`}
+          className={`menu-content md:hidden transition-all duration-300 ease-in-out overflow-hidden ${open ? "sm:max-h-60 opacity-100" : "max-h-0 opacity-0"}`}
         >
           <ul className="flex flex-col mt-3 space-y-3">
             {navigation.map((item, idx) => (
               <li key={idx}>
                 <Link
                   href={item.path}
-                  className={`${item.title === 'Home' ? 'text-green-700': ''} block text-gray-400 hover:text-white transition-colors`}
+                  className={`${item.title === 'Home' ? 'text-green-700': ''} block text-gray-400 py-4 hover:text-white transition-colors`}
                   onClick={() => setOpen(false)}
                 >
                   {item.title}
@@ -101,7 +102,7 @@ export default function Navbar() {
           </ul>
 
           <div className="my-4 space-y-2">
-            <Link href="/login" className="block text-gray-400 hover:text-green-600">
+            <Link href="/login" className="block text-gray-400 hover:text-green-600 pb-4">
               Log in
             </Link>
             <Link

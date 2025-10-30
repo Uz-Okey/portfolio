@@ -1,5 +1,5 @@
 import  ProgressDemo  from "./ProgressDemo";
-
+import { AnimateText } from "@/components/ui/animated-text";
 import About from "./About";
 export default function Professional() {
     return (
@@ -8,9 +8,16 @@ export default function Professional() {
                 <div className="top-0 left-0 absolute  h-full w-full"></div>
                 <div className="relative w-full text-center justify-center items-center pt-10 mx-auto z-10 flex h-full">
                     <div className="text-white text-3xl  md:p-0 font-bold max-w-3xl  md:font-extrabold md:text-[30px] ">
-                        <p className="text-white px-5 text-start md:text-center text-5xl font-bold shadow-2xl text-shadow-2xs z-10">“02 My Expertise”</p>
+                    
+                            <AnimateText
+                              text="02 My Skills"
+                              type="cascade"
+                              className="text-3xl text-shadow-2xs sm:text-4xl font-extrabold text-grey-700 tracking-tight"
+                              duration={0.1}
+                              delay={0}
+                            />
                         
-                        <p className="text-[16px]  text-start sm:text-center px-8 font-normal text-shadow-2xs shadow-2xl py-3 pb-8">My Knowledge Level In Software</p>
+                        <p className="text-[20px] text-gray-700 text-center px-8 font-normal text-shadow-2xs  py-3 ">My Knowledge Level In Software</p>
                           <ProgressDemo/>
 
                                     <About />

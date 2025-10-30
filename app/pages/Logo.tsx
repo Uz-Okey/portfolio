@@ -11,11 +11,11 @@ export default function Logos() {
         <AnimateText
           text="01 My Stack"
           type="cascade"
-          className="text-3xl text-shadow-2xs sm:text-4xl font-extrabold text-white mb-10 tracking-tight"
+          className="text-3xl text-shadow-2xs sm:text-4xl font-extrabold text-grey-700 mb-10 tracking-tight"
           duration={0.1}
           delay={0}
         />
-        <p className="text-white text-shadow-2xs text-sm sm:text-base mb-10 max-w-md mx-auto">
+        <p className="text-gray-700 text-[20px] text-shadow-2xs  sm:text-base mb-10 max-w-md mx-auto">
           These are some of the technologies and tools I work with to bring ideas to life.
         </p>
 

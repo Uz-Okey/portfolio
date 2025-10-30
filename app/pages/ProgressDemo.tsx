@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useRef, useState } from "react";
 
 export default function ProgressDemo() {
@@ -62,12 +61,8 @@ export default function ProgressDemo() {
 
 
     return (
-        <div className="h-[80vh] sm:min-h-screen flex flex-col items-center justify-center px-8">
-            <div className="max-w-3xl w-full p-8 rounded-2xl shadow-xl border border-orange-200 space-y-6">
-                <h1 className="text-2xl font-bold text-center text-white mb-8">
-                    Frontend & Backend Skills
-                </h1>
-
+        <div className="h-[80vh] mt-0 sm:min-h-screen flex flex-col items-center justify-center px-8">
+            <div className="max-w-3xl w-full p-8 rounded-2xl shadow-2xl border border-orange-100 space-y-6">
                 {/* --- Progress Bars --- */}
                 <div className="space-y-5">
 

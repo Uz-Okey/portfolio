@@ -30,7 +30,7 @@ export default function Footer() {
 
                 {/* Social Links */}
                 <div className="flex flex-col">
-                    <p className="text-[14px]">Vist My Socials </p>
+                
                     <div className="flex space-x-4">
 
                         <Link href="https://x.com/Okechy81" target="_blank">

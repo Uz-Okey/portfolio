@@ -19,7 +19,7 @@ export default function Herosection() {
             <br />
             <AnimateText
               text="Uzondu."
-              className="bg-white font-bold text-[40px] md:text-[60px]"
+              className="bg-white text-gray-700 font-bold text-[40px] md:text-[60px]"
               type="elastic"
               custom={1}
             />

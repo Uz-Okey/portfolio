@@ -2,13 +2,13 @@
 import { useEffect, useState } from "react"
 import Link from "next/link"
 import '../style/Navbar.css'
-import { color } from "framer-motion"
+import AuthButton from "./AuthButton"
+
 export default function Navbar() {
   const [open, setOpen] = useState(false)
 
-
   const navigation = [
-    { title: "Home", path: "/", style: `${color}` },
+    { title: "Home", path: "/" },
     { title: "Portfolio", path: "#Portfolio" },
     { title: "Blog", path: "/blog" },
     { title: "Contact", path: "#contact" },
@@ -26,12 +26,12 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className="fixed w-full  top-0 left-0 right-0 z-50 bg-gray-700 backdrop-blur-md border-b border-gray-200 shadow-sm">
-      <div className=" max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed w-full top-0 left-0 right-0 z-50 bg-gray-700 backdrop-blur-md border-b border-gray-200 shadow-sm">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="text-[18px] font-bold myColor text-gray-900">
-            <span className="border-green-700 text-green-700 border-r-4  p-2 rounded-full">O</span>
+            <span className="border-green-700 text-green-700 border-r-4 p-2 rounded-full">O</span>
           </Link>
 
           {/* Desktop Menu */}
@@ -40,8 +40,7 @@ export default function Navbar() {
               <li key={idx}>
                 <Link
                   href={item.path}
-                  className={`text-gray-100 hover:text-white text-[14px] transition-colors ${item.title === "Home" ? "text-green-700" : ""
-                    }`}
+                  className={`text-gray-100 hover:text-white text-[14px] ${item.title === "Home" ? "text-green-700" : ""}`}
                 >
                   {item.title}
                 </Link>
@@ -49,22 +48,14 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Buttons */}
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex text-[14px] items-center space-x-4">
-            <Link href="/login" className="text-gray-900 bg-white px-3 py-2 rounded-md hover:text-gray-800">
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="bg-green-700 text-gray-100 px-3 py-2 text-[14px] rounded-md hover:bg-green-800 transition"
-            >
-              Sign up
-            </Link>
+            <AuthButton />
           </div>
 
           {/* Mobile Button */}
           <button
-            className="menu-btn md:hidden cursor-pointer  rounded-full border p-2 text-white hover:text-gray-500 focus:outline-none"
+            className="menu-btn md:hidden cursor-pointer rounded-full border p-2 text-white hover:text-gray-500 focus:outline-none"
             onClick={() => setOpen(!open)}
           >
             {open ? (
@@ -101,22 +92,12 @@ export default function Navbar() {
             ))}
           </ul>
 
+          {/* Mobile Auth Button */}
           <div className="my-4 space-y-2">
-            <Link href="/login" className="block text-gray-400 hover:text-green-600 pb-4">
-              Log in
-            </Link>
-            <Link
-              href="/signup"
-              className="block bg-green-700 text-white text-center px-4 py-2 rounded-full hover:bg-green-800 transition"
-            >
-              Sign up
-            </Link>
+            <AuthButton />
           </div>
         </div>
       </div>
-
-
-      
     </nav>
   )
 }

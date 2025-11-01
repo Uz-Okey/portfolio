@@ -11,7 +11,7 @@ export default function Logos() {
         <AnimateText
           text="01 My Stack"
           type="cascade"
-          className="text-3xl text-shadow-2xs sm:text-4xl font-extrabold text-grey-700 mb-10 tracking-tight"
+          className="text-3xl text-shadow-2xs sm:text-4xl font-extrabold text-gray-700 mb-10"
           duration={0.1}
           delay={0}
         />
